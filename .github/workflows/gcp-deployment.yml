@@ -2,18 +2,20 @@ name: Blog Posting Project
 on: push
 
 jobs:
-     deploy:
-        runs-on: ubuntu-latest
+  deploy:
+    runs-on: ubuntu-latest
 
-        permissions:
-          contents: 'read'
-          id-token: 'write'
+    permissions:
+      contents: 'read'
+      id-token: 'write'
 
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-        steps:
-          - name: Authenticate to Google Cloud
-            uses: google-github-actions/auth@v3
-            with:
-                workload_identity_provider: ${{ secrets.GCP_WIF_PROVIDER }}
-                service_account: ${{ secrets.GCP_SA_EMAIL }}
-                project_id: ${{ secrets.GCP_PROJECT_ID }}
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v3
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WIF_PROVIDER }}
+          service_account: ${{ secrets.GCP_SA_EMAIL }}
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
