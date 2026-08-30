@@ -8,12 +8,11 @@ jobs:
         env:
           VM_NAME: vm-platform-seed
           ZONE: asia-south1-c
+          USER_NAME: liyanaarachchidilan
 
         permissions:
           contents: 'read'
           id-token: 'write'
-
-
 
         steps:
           - name: Authenticate to Google Cloud
@@ -29,7 +28,11 @@ jobs:
           - name: Start vm-platform-seed
             run: gcloud compute instances start ${{ env.VM_NAME }} --zone=${{ env.ZONE }}
 
-          - name: Connect with the vm-platform-seed through ssh
+          - name: Connect with the vm-platform-seed instance through SSH
             run: > 
-                gcloud compute ssh ${{ env.VM_NAME }} --zone=${{ env.ZONE }}
-                --command "echo 'Connected to vm-platform seed successfully'"
+                gcloud compute ssh ${{ env.USER_NAME }}@${{ env.VM_NAME }} --zone=${{ env.ZONE }}
+                --command "echo 'Connected to vm-platform seed successfully' && cd Blog-Poster-Project-Platform/ &&
+                git pull --recurse-submodules &&
+                source ~/.bashrc &&
+                mvn clean package &&
+                "
