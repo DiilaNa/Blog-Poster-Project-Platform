@@ -60,7 +60,7 @@ jobs:
                     --region=${{ env.REGION }} \
                     --type=proactive \
                     --max-unavailable=3 \
-                    --min-ready=0 \
                     --minimal-action=replace \
                     --replacement-method=recreate \
+                    --max-surge=0 \
                     --version=template=projects/${{ secrets.GCP_PROJECT_ID }}/regions/${{ env.REGION }}/instanceTemplates/${{ env.INSTANCE_TEMPLATE }},name=0-1788091013242
