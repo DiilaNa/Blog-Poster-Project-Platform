@@ -14,6 +14,7 @@ jobs:
           USER_NAME: liyanaarachchidilan
           IMAGE_NAME: vm-platform-seed-boot-image-v2
 
+
         permissions:
           contents: 'read'
           id-token: 'write'
